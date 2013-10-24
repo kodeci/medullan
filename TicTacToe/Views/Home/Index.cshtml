@@ -1,0 +1,48 @@
+﻿@model TicTacToe.Models.Game
+@{
+    ViewBag.Title = "Hello Tic Tac Toe";
+    var Player = ViewBag.player as TicTacToe.Models.User;
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+        </div>
+    </section>
+}
+<div>
+    <form method="POST">
+    <div class="float-left">
+        <label>Name</label> @Html.TextBoxFor(model => Player.Name)<br />
+        <label>Game</label> @Html.TextBoxFor(model => model.Key)<br />
+        <input type="submit" value="Refresh" />
+        @Html.HiddenFor(model => Player.SessionID)
+        @Html.HiddenFor(model => Player.Marker)
+        @*
+        @Html.DisplayFor(model => Player.SessionID) <br />
+        @Html.DisplayFor(model => Player.Marker) . @Html.DisplayFor(model => model.Next) <br />
+        @Html.DisplayFor(model => model.First.SessionID) . @Html.DisplayFor(model => model.Second.SessionID)
+        *@
+    </div>
+    <div class="float-right">
+        <table class="game">
+            <thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead>
+            <tbody>
+            @for (var x = 0; x < Model.Data.Length; x++ )
+            {
+                <tr>
+                    <th>@(x + 1)</th>
+                    @for (var y = 0; y < Model.Data[x].Length; y++ )
+                    {
+                    <td><input type="submit" value="@(Model.Data[x][y])" name="move[@x-@y]"  /></td>
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    </form>
+</div>
